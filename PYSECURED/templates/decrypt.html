@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decryption Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Decryption Page</h1>
+        
+        {% if ciphertext %}
+        <div class="alert alert-info" role="alert">
+            <p>Encrypted Message:</p>
+            <p>{{ ciphertext }}</p>
+        </div>
+
+        <form method="post" action="{{ url_for('decrypt') }}">
+            <div class="form-group">
+                <label for="decryption_key">Enter Decryption Key:</label>
+                <input type="text" id="decryption_key" name="decryption_key" class="form-control" required>
+            </div>
+            <input type="hidden" name="ciphertext" value="{{ ciphertext }}">
+            <button type="submit" class="btn btn-primary">Decrypt Message</button>
+        </form>
+        {% endif %}
+
+        {% if sms_status %}
+        <div class="alert alert-success" role="alert">
+            {{ sms_status }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
